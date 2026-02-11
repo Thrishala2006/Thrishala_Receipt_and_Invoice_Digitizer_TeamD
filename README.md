@@ -1,0 +1,1 @@
+# Thrishala_Receipt_and_Invoice_Digitizer_TeamD
