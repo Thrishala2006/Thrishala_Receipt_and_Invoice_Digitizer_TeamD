@@ -62,7 +62,7 @@ def detect_intent(message):
 
     return None
 
-app = Flask(__name__)
+app = Flask(__name__,template_folder='frontend/template')
 app.secret_key = secrets.token_hex(16)
 
 # safer upload path
