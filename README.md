@@ -208,7 +208,7 @@ This project was built as part of the **Infosys Springboard** program.
 |---|---|
 | Sriya Muthukumar | [@Sriyamk](https://github.com/Sriyamk) |
 | Shaik Mastan | [@skmdmastan07](https://github.com/skmdmastan07) |
-| Trishala Koduru | [@Thrishala2006](https://github.com/Thrishala2006) |
+| Thrishala Koduru | [@Thrishala2006](https://github.com/Thrishala2006) |
 | Atul Chandra | [@Droid-47](https://github.com/Droid-47) |
 | Rithwik Pachipala | [@Rithwik-18](https://github.com/Rithwik-18) |
 | Shailee Chouksey | — |
