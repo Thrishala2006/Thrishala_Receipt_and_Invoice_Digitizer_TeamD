@@ -8,8 +8,10 @@ import secrets
 import jwt
 import ollama
 import json
-
-
+#for sending mail
+from flask_mail import Mail, Message
+import uuid
+from flask import flash
 def detect_intent_llm(message):
 
     intent_list = [i["tag"] for i in intents["intents"]]
@@ -62,8 +64,33 @@ def detect_intent(message):
 
     return None
 
-app = Flask(__name__,template_folder='frontend/template')
+
+# ---------- FLASK APP SETUP ----------
+# BASE_DIR = backend/ folder (where app.py lives)
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+
+
+# frontend/ folder is one level up from backend/
+FRONTEND_DIR = os.path.join(BASE_DIR, "..", "frontend")
+
+app = Flask(
+    __name__,
+    template_folder=os.path.join(FRONTEND_DIR, "templates"),   # frontend/templates/
+    static_folder=FRONTEND_DIR,                                  # frontend/ (serves back_drop, i18n, etc.)
+    static_url_path="/static"                                    # accessed as /static/back_drop/...
+)
+
 app.secret_key = secrets.token_hex(16)
+# ---------------- EMAIL CONFIG ----------------
+app.config['MAIL_SERVER'] = 'smtp.gmail.com'
+app.config['MAIL_PORT'] = 587
+app.config['MAIL_USE_TLS'] = True
+app.config['MAIL_USERNAME'] = 'noreply.invoicedigitizer@gmail.com'
+app.config['MAIL_PASSWORD'] = 'okztpqikspemnrlf'
+
+mail = Mail(app)
+# store reset tokens
+reset_tokens = {}
 
 # safer upload path
 app.config['UPLOAD_FOLDER'] = os.path.join(os.getcwd(), "uploads")
@@ -280,7 +307,7 @@ def reset_password(token):
         return redirect(url_for('index'))
 
     return render_template('reset_password.html')
-    
+
 # ---------- LOGIN PAGE ----------
 @app.route("/login")
 def login_page():
@@ -869,7 +896,7 @@ def chatbot():
         return jsonify({"reply": "AI server error."})
 
 
-# ---------- SERVE FILE ----------
+# ---------- SERVE UPLOADED FILES ----------
 @app.route("/uploads/<filename>")
 def uploaded_file(filename):
 
