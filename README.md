@@ -76,6 +76,9 @@ receipt-digitizer/
 - (Recommended) A virtual environment
 - [Ollama](https://ollama.com) — for the AI chatbot (installed system-wide, not via pip)
 
+### paddel ocr
+pip install flask werkzeug bcrypt pyjwt ollama pytesseract pillow opencv-python
+
 ### 1. Clone the repository
 
 ```bash
